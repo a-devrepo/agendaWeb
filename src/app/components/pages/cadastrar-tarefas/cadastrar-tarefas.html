@@ -1,1 +1,38 @@
-<p>cadastrar-tarefas works!</p>
+<h4>Formulário de cadastro de tarefas</h4>
+<p>Preencha os campos e inclua uma tarefa em sua agenda</p>
+<hr>
+
+<form [formGroup]="formCadastro" (ngSubmit)="cadastrarTarefa()">
+    
+    <div class="mb-3">
+        <label>Nome da tarefa:</label>
+        <input type="text" class="form-control" formControlName="nome"/>
+    </div>
+
+    <div class="mb-3">
+        <label>Data da tarefa:</label>
+        <input type="date" class="form-control" formControlName="data" />
+    </div>
+
+    <div class="mb-3">
+        <label>Prioridade da tarefa:</label>
+        <select class="form-select" formControlName="prioridade">
+            <option value="">Escolha uma opção</option>
+            <option value="BAIXA">Baixa prioridade</option>
+            <option value="MEDIA">Média prioridade</option>
+            <option value="ALTA">Alta prioridade</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Categoria da tarefa:</label>
+        <select class="form-select" formControlName="categoriaId">
+            <option value="">Escolha uma opção</option>
+            <option value="1">Trabalho</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <input type="submit" class="btn btn-success" value="Cadastrar tarefa" />
+    </div>
+</form>
