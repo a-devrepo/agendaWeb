@@ -3,15 +3,21 @@
 <hr>
 
 <form [formGroup]="formCadastro" (ngSubmit)="cadastrarTarefa()">
-    
+
     <div class="mb-3">
         <label>Nome da tarefa:</label>
-        <input type="text" class="form-control" formControlName="nome"/>
+        <input type="text" class="form-control" formControlName="nome" />
+        <div class="text-danger" *ngIf="formCadastro.get('nome')?.touched && formCadastro.get('nome')?.invalid">
+            O nome da tarefa é obrigatório e deve ter no mínimo 8 caracteres
+        </div>
     </div>
 
     <div class="mb-3">
         <label>Data da tarefa:</label>
         <input type="date" class="form-control" formControlName="data" />
+        <div class="text-danger" *ngIf="formCadastro.get('data')?.touched && formCadastro.get('data')?.invalid">
+            A data da tarefa é obrigatória
+        </div>
     </div>
 
     <div class="mb-3">
@@ -22,6 +28,10 @@
             <option value="MEDIA">Média prioridade</option>
             <option value="ALTA">Alta prioridade</option>
         </select>
+        <div class="text-danger"
+            *ngIf="formCadastro.get('prioridade')?.touched && formCadastro.get('prioridade')?.invalid">
+            A prioridade da tarefa é obrigatória
+        </div>
     </div>
 
     <div class="mb-3">
@@ -30,9 +40,16 @@
             <option value="">Escolha uma opção</option>
             <option value="1">Trabalho</option>
         </select>
+        <div class="text-danger"
+            *ngIf="formCadastro.get('categoriaId')?.touched && formCadastro.get('categoriaId')?.invalid">
+            A categoria da tarefa é obrigatória
+        </div>
     </div>
 
     <div class="mb-3">
-        <input type="submit" class="btn btn-success" value="Cadastrar tarefa" />
+        <input type="submit" class="btn"
+            [ngClass]="{'btn-secondary':formCadastro.invalid, 'btn-success': formCadastro.valid}"
+            value="Cadastrar tarefa" 
+            [disabled]="formCadastro.invalid" />
     </div>
 </form>
