@@ -38,7 +38,10 @@
         <label>Categoria da tarefa:</label>
         <select class="form-select" formControlName="categoriaId">
             <option value="">Escolha uma opção</option>
-            <option value="1">Trabalho</option>
+            
+            <option *ngFor=" let categoria of categorias()"value="categoria.id">
+                {{categoria.nome}}
+            </option>
         </select>
         <div class="text-danger"
             *ngIf="formCadastro.get('categoriaId')?.touched && formCadastro.get('categoriaId')?.invalid">
