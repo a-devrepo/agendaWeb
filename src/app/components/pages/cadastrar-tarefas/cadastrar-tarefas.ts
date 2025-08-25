@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-cadastrar-tarefas',
@@ -18,16 +19,19 @@ export class CadastrarTarefas {
   private http = inject(HttpClient);
 
   categorias = signal<any[]>([]);
+  mensagemErro = signal('');
+  mensagemSucesso = signal('');
 
   ngOnInit(){
-    this.http.get('http://localhost:8082/api/v1/categorias')
+    this.http.get(environment.apiCategorias)
     .subscribe(
       {
-        next:(response) =>{
+        next:(response) => {
           this.categorias.set(response as any[]);
         },
-        error:(e) =>{
-          console.error(`Erro ao carregar categorias: ${e}`);
+        error:(e) => {
+          const message = e.error?.message || 'Erro desconhecido do servidor';
+          console.error(message);
         }
       }
     )
@@ -43,7 +47,20 @@ export class CadastrarTarefas {
   );
 
   cadastrarTarefa(){
-    console.log(this.formCadastro.getRawValue());
-    this.formCadastro.reset();
+     const tarefa = this.formCadastro.getRawValue();
+
+     this.http.post(environment.apiTarefas,tarefa)
+     .subscribe(
+      {
+        next:(response) => {
+          this.mensagemSucesso.set(`Tarefa ${tarefa.nome} cadastrada com sucesso`);
+          this.formCadastro.reset();
+        },
+        error:(e) =>{
+          const message = e.error?.message || 'Erro desconhecido do Servidor';
+          this.mensagemErro.set(`Erro: ${message}`);
+        }
+      }
+     );
   }
 }

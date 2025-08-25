@@ -2,6 +2,20 @@
 <p>Preencha os campos e inclua uma tarefa em sua agenda</p>
 <hr>
 
+<div *ngIf="mensagemSucesso()" 
+class="alert alert-success alert-dismissible fade show" 
+role="alert">
+<strong>{{ mensagemSucesso() }}</strong>
+<button type="button" class="btn-close" aria-label="Fechar" (click)="mensagemSucesso.set('')"></button>
+</div>
+
+<div *ngIf="mensagemErro()" 
+class="alert alert-danger alert-dismissible fade show" 
+role="alert">
+<strong>{{ mensagemErro() }}</strong>
+<button type="button" class="btn-close" aria-label="Fechar" (click)="mensagemErro.set('')"></button>
+</div>
+
 <form [formGroup]="formCadastro" (ngSubmit)="cadastrarTarefa()">
 
     <div class="mb-3">
@@ -39,7 +53,7 @@
         <select class="form-select" formControlName="categoriaId">
             <option value="">Escolha uma opção</option>
             
-            <option *ngFor=" let categoria of categorias()"value="categoria.id">
+            <option *ngFor=" let categoria of categorias()" [value]="categoria.id">
                 {{categoria.nome}}
             </option>
         </select>
