@@ -30,15 +30,17 @@
             <th>Nome da tarefa</th>
             <th>Data</th>
             <th>Prioridade</th>
+            <th>Finalizado</th>
             <th>Categoria</th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let tarefa of tarefas()">
-            <td>{{tarefa.nome}}</td>
+            <td>{{tarefa.nome | uppercase}}</td>
             <td>{{tarefa.data | date: 'dd/MM/yyyy'}}</td>
             <td>{{tarefa.prioridade}}</td>
+            <td>{{tarefa.finalizada ? 'SIM' : 'NÃO'}}</td>
             <td>{{tarefa.categoria.nome}}</td>
             <td>
                 <button class="btn btn-outline-primary btn-sm me-1">
