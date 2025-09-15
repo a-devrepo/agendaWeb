@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule,Validators, FormGroup, FormControl } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-autenticar-usuario',
@@ -28,7 +29,12 @@ export class AutenticarUsuario {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log('Login enviado:', this.form.value);
+
+    this.http.post(environment.apiUsuarios + '/autenticar', this.form.value)
+    .subscribe({ 
+      next: (data) => { console.log(data); }, 
+      error: (e) => { console.log(e.error); } 
+    });
     }
   }
 }
