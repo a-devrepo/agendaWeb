@@ -1,18 +1,16 @@
 <div class="container-fluid vh-100">
     <div class="row h-100">
 
-        <!-- Lado esquerdo com gradient -->
         <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center"
-            style="background: linear-gradient(135deg, #6fb1fc 0%, #4364f7 100%);">
+            style="background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);">
             <h2 class="text-white fw-semibold">Bem-vindo de volta!</h2>
         </div>
 
-        <!-- Lado direito com formulário -->
-        <div class="col-md-6 d-flex align-items-center justify-content-center bg-light">
-            <div class="w-75 p-5 rounded shadow-sm">
+        <div class="col-md-6 d-flex align-items-center justify-content-center bg-dark">
+            <div class="w-100" style="max-width: 400px; padding: 2rem; border-radius: 0.5rem; 
+             background-color: #000000; color: #ffffff; box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.3);">
 
-                <!-- Nome da aplicação -->
-                <h1 class="text-center mb-4 fw-bold text-primary" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+                <h1 class="text-center mb-4 fw-bold text-success">
                     AGENDA DE TAREFAS
                 </h1>
 
@@ -21,20 +19,20 @@
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">E-mail</label>
-                        <input type="email" id="email" class="form-control" placeholder="Digite seu e-mail"
+                        <label for="email" class="form-label text-white">E-mail</label>
+                        <input type="email" id="email" class="form-control w-100" placeholder="Digite seu e-mail"
                             formControlName="email">
-                        <div class="text-danger" *ngIf="form.get('email')?.touched">
-                            <span *ngIf="form.get('email')?.hasError('required')">O email é obrigatório.</span>
-                            <span *ngIf="form.get('email')?.hasError('email')">Email com formato inválido.</span>
+                        <div class="text-danger mt-1" *ngIf="form.get('email')?.touched">
+                            <span *ngIf="form.get('email')?.hasError('required')">O e-mail é obrigatório.</span>
+                            <span *ngIf="form.get('email')?.hasError('email')">Formato de e-mail inválido.</span>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="senha" class="form-label">Senha</label>
-                        <input type="password" id="senha" class="form-control" placeholder="Digite sua senha"
+                        <label for="senha" class="form-label text-white">Senha</label>
+                        <input type="password" id="senha" class="form-control w-100" placeholder="Digite sua senha"
                             formControlName="senha">
-                        <div class="text-danger" *ngIf="form.get('senha')?.touched">
+                        <div class="text-danger mt-1" *ngIf="form.get('senha')?.touched">
                             <span *ngIf="form.get('senha')?.hasError('required')">A senha é obrigatória.</span>
                             <span *ngIf="form.get('senha')?.hasError('minlength')">A senha deve ter no mínimo 8
                                 caracteres.</span>
@@ -42,14 +40,15 @@
                     </div>
 
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+                        <button type="submit" class="btn btn-success w-100" [disabled]="form.invalid">
                             Entrar
                         </button>
                     </div>
 
                     <p class="text-center">
                         Não tem conta?
-                        <a routerLink="/pages/criar-usuario" class="text-decoration-none">Cadastre-se aqui</a>
+                        <a routerLink="/pages/criar-usuario" class="text-success text-decoration-none">Cadastre-se
+                            aqui</a>
                     </p>
 
                 </form>
