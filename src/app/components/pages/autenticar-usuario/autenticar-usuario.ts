@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule,Validators, FormGroup, FormControl } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -21,7 +21,7 @@ export class AutenticarUsuario {
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, ]),
+    senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
   
@@ -29,7 +29,6 @@ export class AutenticarUsuario {
   onSubmit() {
     if (this.form.valid) {
       console.log('Login enviado:', this.form.value);
-      // Aqui você chamaria o AuthService para autenticar
     }
   }
 }
