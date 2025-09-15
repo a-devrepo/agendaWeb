@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
+import { Navbar } from "../../shared/navbar/navbar";
 
 @Component({
   selector: 'app-consultar-tarefas',
@@ -10,7 +11,8 @@ import { environment } from '../../../../environments/environment';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-  ],
+    Navbar
+],
   templateUrl: './consultar-tarefas.html',
   styleUrl: './consultar-tarefas.css'
 })
