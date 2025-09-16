@@ -1,13 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule, NgFor, NgClass } from '@angular/common';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-notification',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, NgFor, NgClass],
   templateUrl: './notification.html',
-  styleUrl: './notification.css'
+  styleUrls: ['./notification.css']
 })
 export class Notification {
-  @Input() mensagemSucesso: string | null = null;
-  @Input() mensagemErro: string | null = null;
+  constructor(public notificationService: NotificationService) {}
 }
