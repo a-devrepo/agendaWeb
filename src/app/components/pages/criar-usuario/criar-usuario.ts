@@ -4,7 +4,7 @@ import { Component, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 import { environment } from '../../../../environments/environment';
-import { Notification } from '../../shared/notification/notification';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-criar-usuario',
@@ -12,16 +12,14 @@ import { Notification } from '../../shared/notification/notification';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    RouterLink,
-    Notification
-  ],
+    RouterLink
+],
   templateUrl: './criar-usuario.html',
   styleUrl: './criar-usuario.css'
 })
 export class CriarUsuario {
 
-  mensagemSucesso: string | null = null;
-  mensagemErro: string | null = null;
+  notificationService = inject(NotificationService);
 
   http = inject(HttpClient);
 
@@ -56,20 +54,14 @@ export class CriarUsuario {
 
   onSubmit() {
     if (this.form.valid) {
-
-      this.mensagemSucesso = null;
-      this.mensagemErro = null;
+      
       const usuario = this.form.getRawValue();
 
       this.http.post(`${environment.apiUsuarios}/criar`, usuario)
         .subscribe({
           next: (response:any) =>{
-            this.mensagemSucesso = 'Usuário criado com sucesso!';
+            this.notificationService.showSuccess('Usuário criado com sucesso');
             this.form.reset();
-          },
-          error: (e) =>{
-            const mensagem = e.error?.message || 'Erro desconhecido no servidor';
-            this.mensagemErro = mensagem;
           }
         });
     }
