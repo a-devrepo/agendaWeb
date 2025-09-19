@@ -1,18 +1,21 @@
 <app-navbar />
-<div class="container mt-3">
-    <div class="card shadow">
-        <div class="card-body">
-            <h4>Dashboard principal</h4>
-            <p>Seja bem vindo ao sistema de agenda de tarefas.</p>
 
-            <div class="row mt-2">
-                <div class="col-md-6" *ngIf="graficoColunas() as grafico">
-                    <div [chart]="grafico"></div>
-                </div>
-                <div class="col-md-6" *ngIf="graficoDonut() as grafico">
-                    <div [chart]="grafico"></div>
-                </div>
+<div class="vh-100 d-flex justify-content-center align-items-center"
+    style="background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);">
+
+    <div class="w-100" style="max-width: 1200px; padding: 3rem; border-radius: 0.5rem; 
+    background-color: #1c1c1c; color: #ffffff; box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.3); min-height: 650px;">
+
+        <h4 class="mb-4 text-center">Dashboard principal</h4>
+
+        <div class="row h-100">
+            <div class="col-md-6 d-flex" *ngIf="graficoColunas() as grafico">
+                <div [chart]="grafico" class="flex-fill" style="height: 400px;"></div>
+            </div>
+            <div class="col-md-6 d-flex" *ngIf="graficoDonut() as grafico">
+                <div [chart]="grafico" class="flex-fill" style="height: 400px;"></div>
             </div>
         </div>
+
     </div>
 </div>
