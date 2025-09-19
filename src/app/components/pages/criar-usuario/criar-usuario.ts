@@ -5,7 +5,6 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validatio
 import { RouterLink, RouterModule } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NotificationService } from '../../../services/notification.service';
-
 @Component({
   selector: 'app-criar-usuario',
   imports: [
@@ -22,6 +21,9 @@ export class CriarUsuario {
   notificationService = inject(NotificationService);
 
   http = inject(HttpClient);
+
+  mostrarModal = false;
+
 
   senhasIguaisValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const group = control as FormGroup;
@@ -47,9 +49,37 @@ export class CriarUsuario {
     ]),
     confirmarSenha: new FormControl('', [
       Validators.required
+    ]),
+    termos: new FormControl(false, [
+      Validators.required
     ])
   }, { validators: this.senhasIguaisValidator }
 );
+
+onClickCheckbox(event: Event) {
+  const aceito = this.form.get('termos')?.value;
+
+  if (!aceito) {
+    event.preventDefault();
+    this.mostrarModal = true;
+  }
+}
+
+abrirModalTermos(event?: Event) {
+  if (event) {
+    event.preventDefault();
+  }
+  this.mostrarModal = true;
+}
+
+fecharModal() {
+  this.mostrarModal = false;
+}
+
+aceitarTermos() {
+  this.form.get('termos')?.setValue(true);
+  this.mostrarModal = false;
+}
 
 
   onSubmit() {
