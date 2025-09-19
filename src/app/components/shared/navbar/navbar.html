@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <a class="navbar-brand text-success fw-bold" [routerLink]="['/pages/dashboard']">AgendaWeb</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
     </button>
 
@@ -15,16 +15,33 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link text-white dropdown-toggle" role="button" data-bs-toggle="dropdown"
-             (click)="$event.preventDefault()" aria-expanded="false">
+            (click)="$event.preventDefault()" aria-expanded="false">
             Gerenciamento de tarefas
           </a>
-          <ul class="dropdown-menu" style="background-color: #1c1c1c;">
-            <li><a class="dropdown-item text-white" [routerLink]="['/pages/cadastrar-tarefas']">Cadastrar tarefas</a></li>
-            <li><a class="dropdown-item text-white" [routerLink]="['/pages/consultar-tarefas']">Consultar tarefas</a></li>
+          <ul class="dropdown-menu p-2" style="background-color: #1c1c1c; border-radius: 0; border: none;">
+            <li>
+              <a class="btn btn-outline-light w-100 mb-1 text-start" [routerLink]="['/pages/cadastrar-tarefas']">
+                Cadastrar tarefas
+              </a>
+            </li>
+            <li>
+              <a class="btn btn-outline-light w-100 text-start" [routerLink]="['/pages/consultar-tarefas']">
+                Consultar tarefas
+              </a>
+            </li>
           </ul>
         </li>
-
       </ul>
+      <div class="d-flex align-items-center ms-auto">
+        <div class="text-white me-3 text-end">
+          <div><strong>{{ nomeUsuario() }}</strong></div>
+          <div style="font-size: 0.875rem;">{{ emailUsuario() }}</div>
+        </div>
+        <button class="btn btn-outline-light btn-sm" (click)="logout()">
+          Sair do sistema
+        </button>
+      </div>
+
     </div>
   </div>
 </nav>
