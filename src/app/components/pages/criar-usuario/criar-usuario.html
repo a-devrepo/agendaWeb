@@ -1,1 +1,126 @@
-<p>criar-usuario works!</p>
+<div class="container-fluid vh-100">
+    <div class="row h-100">
+
+        <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center"
+            style="background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);">
+            <h2 class="text-white fw-semibold">Cadastre-se.</h2>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-center justify-content-center bg-dark">
+            <div class="w-100" style="max-width: 400px; padding: 2rem; border-radius: 0.5rem; 
+            background-color: #000000; color: #ffffff; box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.3);">
+
+                <h1 class="text-center mb-4 fw-bold text-success">
+                    AGENDA DE TAREFAS
+                </h1>
+
+                <h3 class="mb-4 text-center">Criar conta</h3>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                    <div class="mb-3">
+                        <label for="nome" class="form-label text-white">Nome</label>
+                        <input type="text" id="nome" class="form-control w-100" formControlName="nome"
+                            placeholder="Digite seu nome completo">
+
+                        <div class="text-danger mt-1" *ngIf="form.get('nome')?.touched">
+                            <span *ngIf="form.get('nome')?.hasError('required')">
+                                Nome é obrigatório.
+                            </span>
+                            <span *ngIf="form.get('nome')?.hasError('minlength')">
+                                Nome deve ter no mínimo 6 caracteres.
+                            </span>
+                            <span *ngIf="form.get('nome')?.hasError('maxlength')">
+                                Nome deve ter no máximo 100 caracteres.
+                            </span>
+                            <span *ngIf="form.get('nome')?.hasError('pattern')">
+                                O nome só pode ter letras e espaços.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label text-white">E-mail</label>
+                        <input type="email" id="email" class="form-control w-100" placeholder="Digite seu e-mail"
+                            formControlName="email">
+                        <div class="text-danger mt-1" *ngIf="form.get('email')?.touched">
+                            <span *ngIf="form.get('email')?.hasError('required')">O e-mail é obrigatório.</span>
+                            <span *ngIf="form.get('email')?.hasError('email')">Formato de e-mail inválido.</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="senha" class="form-label text-white">Senha</label>
+                        <input type="password" id="senha" class="form-control w-100" placeholder="Digite sua senha"
+                            formControlName="senha">
+                        <div class="text-danger mt-1" *ngIf="form.get('senha')?.touched">
+                            <span *ngIf="form.get('senha')?.hasError('required')">A senha é obrigatória.</span>
+                            <span *ngIf="form.get('senha')?.hasError('pattern')">
+                                A senha deve ter pelo menos 8 caracteres, com maiúsculas, minúsculas, número, símbolo,
+                                sem espaços nem caracteres repetidos.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirmarSenha" class="form-label text-white">Confirmar senha</label>
+                        <input type="password" id="confirmarSenha" class="form-control w-100"
+                            placeholder="Confirme sua senha" formControlName="confirmarSenha">
+                        <div class="text-danger mt-1" *ngIf="form.get('confirmarSenha')?.touched">
+                            <span *ngIf="form.get('confirmarSenha')?.hasError('required')">Confirmação de senha é
+                                obrigatória.</span>
+                            <span *ngIf="form.get('confirmarSenha')?.hasError('mismatch')">As senhas não
+                                coincidem.</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="termos"
+                                [checked]="form.get('termos')?.value"   (click)="onClickCheckbox($event)"/>
+                            <label class="form-check-label text-white" for="termos">
+                                Li e aceito os termos e condições
+                            </label>
+                            <div class="text-danger mt-1"
+                                *ngIf="form.get('termos')?.touched && form.get('termos')?.hasError('required')">
+                                Você deve aceitar os termos para continuar.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-success w-100" [disabled]="form.invalid">
+                            Cadastrar
+                        </button>
+                    </div>
+
+                    <p class="text-center">
+                        Já tem conta?<a routerLink="/pages/autenticar-usuario"
+                            class="text-success text-decoration-none"> Faça login aqui</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop fade show" *ngIf="mostrarModal" style="display:block;"></div>
+<div class="modal d-block" tabindex="-1" *ngIf="mostrarModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Termos e Condições</h5>
+                <button type="button" class="btn-close" (click)="fecharModal()"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="fecharModal()">Fechar</button>
+                <button type="button" class="btn btn-primary" (click)="aceitarTermos()">Aceitar</button>
+            </div>
+        </div>
+    </div>
+</div>
