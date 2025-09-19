@@ -1,38 +1,46 @@
 <app-navbar />
 
-<div class="container mt-3">
-    <div class="card shadow">
-        <div class="card-body">
-            <h4>Consulta de tarefas</h4>
-            <p>Selecione o período de datas desejado para consultar as tarefas da agenda.</p>
-            <hr />
+<div class="vh-100 d-flex justify-content-center align-items-start"
+    style="background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%); padding-top: 2rem;">
 
-            <form [formGroup]="formConsulta" (ngSubmit)="consultarTarefas()">
-                <div class="row">
-                    <div class="col">
-                        <input type="date" class="form-control" formControlName="dataMin" />
-                        <div class="text-danger"
-                            *ngIf="formConsulta.get('dataMin')?.touched && formConsulta.get('dataMin')?.invalid">
-                            Por favor, informe a data de início.
-                        </div>
-                    </div>
-                    <div class="col">
-                        <input type="date" class="form-control" formControlName="dataMax" />
-                        <div class="text-danger"
-                            *ngIf="formConsulta.get('dataMax')?.touched && formConsulta.get('dataMax')?.invalid">
-                            Por favor, informe a data de fim.
-                        </div>
-                    </div>
-                    <div class="col">
-                        <input type="submit" class="btn btn-success" value="Pesquisar tarefas"
-                            [ngClass]="{'btn-success': formConsulta.valid, 'btn-secondary': formConsulta.invalid}"
-                            [disabled]="formConsulta.invalid" />
+    <div class="w-100" style="max-width: 1200px; min-height: 700px; padding: 2.5rem; border-radius: 0.5rem; 
+    background-color: #2c2c2c; color: #ffffff; box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.3);">
+
+        <h4 class="mb-3 text-center">Consulta de tarefas</h4>
+        <p class="mb-4 text-center">Selecione o período de datas desejado para consultar as tarefas da agenda.</p>
+        <hr class="border-secondary" />
+
+        <form [formGroup]="formConsulta" (ngSubmit)="consultarTarefas()">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <input type="date" class="form-control bg-secondary text-white border-secondary"
+                        formControlName="dataMin" />
+                    <div class="text-danger mt-1"
+                        *ngIf="formConsulta.get('dataMin')?.touched && formConsulta.get('dataMin')?.invalid">
+                        Por favor, informe a data de início.
                     </div>
                 </div>
-            </form>
 
-            <table class="table table-striped table-hover">
-                <thead>
+                <div class="col-md-4">
+                    <input type="date" class="form-control bg-secondary text-white border-secondary"
+                        formControlName="dataMax" />
+                    <div class="text-danger mt-1"
+                        *ngIf="formConsulta.get('dataMax')?.touched && formConsulta.get('dataMax')?.invalid">
+                        Por favor, informe a data de fim.
+                    </div>
+                </div>
+
+                <div class="col-md-4 d-grid">
+                    <input type="submit" class="btn btn-success"
+                        [ngClass]="{'btn-success': formConsulta.valid, 'btn-secondary': formConsulta.invalid}"
+                        [disabled]="formConsulta.invalid" value="Pesquisar tarefas" />
+                </div>
+            </div>
+        </form>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-hover text-white align-middle">
+                <thead class="table-dark">
                     <tr>
                         <th>Nome da tarefa</th>
                         <th>Data</th>
@@ -50,16 +58,14 @@
                         <td>{{tarefa.finalizada ? 'SIM' : 'NÃO'}}</td>
                         <td>{{tarefa.categoria.nome}}</td>
                         <td>
-                            <button class="btn btn-outline-primary btn-sm me-1">
-                                Editar
-                            </button>
-                            <button class="btn btn-outline-danger btn-sm me-1" (click)="excluirTarefa(tarefa.id)">
-                                Excluir
-                            </button>
+                            <button class="btn btn-outline-primary btn-sm me-1">Editar</button>
+                            <button class="btn btn-outline-danger btn-sm me-1"
+                                (click)="excluirTarefa(tarefa.id)">Excluir</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
     </div>
 </div>
