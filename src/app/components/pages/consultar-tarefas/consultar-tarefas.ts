@@ -4,6 +4,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { Navbar } from "../../shared/navbar/navbar";
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-consultar-tarefas',
@@ -18,6 +19,7 @@ import { Navbar } from "../../shared/navbar/navbar";
 })
 export class ConsultarTarefas {
 
+  notificationService = inject(NotificationService);
   private http = inject(HttpClient);
 
   tarefas = signal<any[]>([]);
@@ -52,11 +54,8 @@ export class ConsultarTarefas {
         .subscribe(
           {
             next: (response) => {
-              alert(response)
+              this.notificationService.showSuccess('Tarefa excluída com sucesso');
               this.consultarTarefas();
-            },
-            error: (e) => {
-              console.log(e);
             }
           })
     }
