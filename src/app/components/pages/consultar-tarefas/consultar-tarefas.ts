@@ -5,6 +5,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { environment } from '../../../../environments/environment';
 import { Navbar } from "../../shared/navbar/navbar";
 import { NotificationService } from '../../../services/notification.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-consultar-tarefas',
@@ -12,7 +13,8 @@ import { NotificationService } from '../../../services/notification.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    Navbar
+    Navbar,
+    RouterLink
 ],
   templateUrl: './consultar-tarefas.html',
   styleUrl: './consultar-tarefas.css'
