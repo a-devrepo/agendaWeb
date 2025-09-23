@@ -58,7 +58,11 @@
                         <td>{{tarefa.finalizada ? 'SIM' : 'NÃO'}}</td>
                         <td>{{tarefa.categoria.nome}}</td>
                         <td>
-                            <button class="btn btn-outline-primary btn-sm me-1">Editar</button>
+                            <button class="btn btn-outline-primary btn-sm me-1" 
+                            [routerLink]="['/pages/editar-tarefas', tarefa.id]">
+                                Editar
+                        </button>
+
                             <button class="btn btn-outline-danger btn-sm me-1"
                                 (click)="excluirTarefa(tarefa.id)">Excluir</button>
                         </td>

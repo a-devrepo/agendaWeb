@@ -1,0 +1,80 @@
+<app-navbar />
+
+<div class="vh-100 d-flex justify-content-center align-items-start"
+    style="background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%); padding-top: 2rem;">
+
+    <div class="w-100" style="max-width: 900px; padding: 2rem; border-radius: 0.5rem; 
+    background-color: #2c2c2c; color: #ffffff; box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.3);">
+
+        <h4 class="mb-3 text-center">Edição de tarefas</h4>
+        <p class="mb-4 text-center">Altere os campos desejados e salve as mudanças</p>
+        <hr class="border-secondary">
+
+        <form [formGroup]="formEdicao" (ngSubmit)="editarTarefa()">
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Nome da tarefa:</label>
+                    <input type="text" class="form-control bg-secondary text-white border-secondary"
+                        formControlName="nome" />
+                    <div class="text-danger mt-1"
+                        *ngIf="formEdicao.get('nome')?.touched && formEdicao.get('nome')?.invalid">
+                        O nome da tarefa é obrigatório e deve ter no mínimo 8 caracteres
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Data da tarefa:</label>
+                    <input type="date" class="form-control bg-secondary text-white border-secondary"
+                        formControlName="data" />
+                    <div class="text-danger mt-1"
+                        *ngIf="formEdicao.get('data')?.touched && formEdicao.get('data')?.invalid">
+                        A data da tarefa é obrigatória
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Prioridade da tarefa:</label>
+                    <select class="form-select bg-secondary text-white border-secondary" formControlName="prioridade">
+                        <option value="">Escolha uma opção</option>
+                        <option value="BAIXA">Baixa prioridade</option>
+                        <option value="MEDIA">Média prioridade</option>
+                        <option value="ALTA">Alta prioridade</option>
+                    </select>
+                    <div class="text-danger mt-1"
+                        *ngIf="formEdicao.get('prioridade')?.touched && formEdicao.get('prioridade')?.invalid">
+                        A prioridade da tarefa é obrigatória
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Categoria da tarefa:</label>
+                    <select class="form-select bg-secondary text-white border-secondary" formControlName="categoriaId">
+                        <option value="">Escolha uma opção</option>
+                        <option *ngFor="let categoria of categorias()" [value]="categoria.id">
+                            {{categoria.nome}}
+                        </option>
+                    </select>
+                    <div class="text-danger mt-1"
+                        *ngIf="formEdicao.get('categoriaId')?.touched && formEdicao.get('categoriaId')?.invalid">
+                        A categoria da tarefa é obrigatória
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-check form-switch mb-3">
+                <input type="checkbox" class="form-check-input" id="finalizadaCheck"
+                    formControlName="finalizada" />
+                <label class="form-check-label" for="finalizadaCheck">Tarefa finalizada</label>
+            </div>
+
+            <div class="d-grid mt-3">
+                <input type="submit" class="btn btn-warning" value="Salvar alterações"
+                    [disabled]="formEdicao.invalid" />
+            </div>
+
+        </form>
+    </div>
+</div>
