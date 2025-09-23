@@ -38,7 +38,7 @@ export class Navbar {
       
       sessionStorage.removeItem('auth');
 
-      this.router.navigate(['/pages/dashboard']);
+      this.router.navigate(['/pages/autenticar-usuario']);
     }
   }
 }
