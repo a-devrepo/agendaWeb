@@ -1,6 +1,6 @@
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050; min-width: 300px;">
     <div *ngFor="let n of notificationService.notifications()" class="toast show mb-2"
-        [ngClass]="{'bg-success text-white': n.type === 'success', 'bg-danger text-white': n.type === 'error'}"
+    [ngClass]="{'text-bg-success': n.type === 'success', 'text-bg-danger': n.type === 'error'}"
         role="alert" aria-live="assertive" aria-atomic="true">
 
         <div class="d-flex">
