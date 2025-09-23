@@ -27,7 +27,6 @@ export class Navbar {
       const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
       const usuario = JSON.parse(decryptedData);
 
-      console.log(usuario)
       this.nomeUsuario.set(usuario.nome);
       this.emailUsuario.set(usuario.email);
     }
@@ -35,9 +34,7 @@ export class Navbar {
 
   logout(){
     if(confirm('Deseja realmente sair do sistema?')){
-      
       sessionStorage.removeItem('auth');
-
       this.router.navigate(['/pages/autenticar-usuario']);
     }
   }
